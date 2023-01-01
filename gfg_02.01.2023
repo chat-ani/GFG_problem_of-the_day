@@ -1,0 +1,37 @@
+The given problem is very simple. Its a tree problem based on bfs.
+
+IDEA:
+Its a simple but modified version of Level Order Traversal. 
+There we just print level by level. 
+But, here instead of that, we are calculating the maximun value of each level by taking a max_  variable. 
+Afterthat just add the max_ value to the ans vector.
+
+TIME & SPACE COMPLEXITY:
+TC : O(n)
+SC : O(n)
+
+CODE:
+class Solution {
+  public:
+    vector<int> maximumValue(Node* root) {
+        queue<Node*> q;
+        vector<int> ans;
+        q.push(root);
+        while(!q.empty()){
+            int size = q.size();
+            int max_ = INT_MIN;
+            while(size > 0){
+                Node* node = q.front();
+                q.pop();
+                max_ = max(max_, node -> data);
+                if(node -> left)
+                    q.push(node -> left);
+                if(node -> right)
+                    q.push(node -> right);
+                size--;
+            }
+            ans.push_back(max_);
+        }
+        return ans;
+    }
+};
